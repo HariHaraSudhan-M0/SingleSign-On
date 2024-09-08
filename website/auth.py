@@ -15,13 +15,13 @@ def login():
             if check_password_hash(user.passsword,passsword):
                 flash('logged in successfully',category='success')
                 login_user(user,remember=True)
+                return render_template("home.html",user = current_user)
             else:
                 flash('incorrect password',category='error')
         else:
             flash('email not exists',category='error')
+    return render_template("login.html",user = current_user)
 
-
-    return render_template("home.html",boolean=True)
 @auth.route('/logout')
 @login_required
 def logout():
