@@ -18,13 +18,10 @@ def create_app():
     app.register_blueprint(auth,url_prefix='/')
 
     from .models import User, Book
-
-    create_database(app)
+    with app.app_context():
+        db.create_all()
 
     return app
 
-def create_database(application):
-    if not path.exists('website/'+DB_NAME):
-        db.create_all(app=application)
-        print('database created')
+
     
