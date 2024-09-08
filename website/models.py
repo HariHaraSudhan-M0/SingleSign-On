@@ -14,3 +14,4 @@ class User(db.Model,UserMixin): #login with usermixin
     passsword = db.Column(db.String(100))
     first_name = db.Column(db.String(100))
     Book = db.relationship('Book')
+    
