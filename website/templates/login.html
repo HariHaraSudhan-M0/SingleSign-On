@@ -1,7 +1,13 @@
-{% extends "base.html" %} {% block title %}Login{% endblock %} {% block content
-  %}
+{% extends "base.html" %}
+
+{% block title %}
+Login
+{% endblock %}
+
+{% block content %}
+  <h3 align="center">Login</h3>
+  
   <form method="POST">
-    <h3 align="center">Login</h3>
     <div class="form-group">
       <label for="email">Email Address</label>
       <input
@@ -22,7 +28,9 @@
         placeholder="Enter password"
       />
     </div>
-    <br />
-    <button type="submit" class="btn btn-primary">Login</button>
+    <div class="text-center">
+      <button type="submit" class="btn btn-primary">Login</button>
+      <a href="{{ url_for('auth.login_with_auth0') }}" class="btn btn-primary ml-2" style="background-color: #007bff; color: white;">Continue with Auth0</a>
+    </div>
   </form>
-  {% endblock %}
+{% endblock %}
