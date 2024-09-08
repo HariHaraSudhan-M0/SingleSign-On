@@ -1,17 +1,14 @@
 from . import db
-from flask_login import UserMixin  #custom class 
-from sqlalchemy.sql import func
+from flask_login import UserMixin
+
+class User(db.Model, UserMixin):
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(100), unique=True, nullable=False)
+    passsword = db.Column(db.String(100), nullable=False)
+    first_name = db.Column(db.String(100), nullable=False)
+    books = db.relationship('Book', backref='owner', lazy=True)
 
 class Book(db.Model):
-    id = db.Column(db.Integer,primary_key=True)#auto incremented
+    id = db.Column(db.Integer, primary_key=True)
     book_name = db.Column(db.String(200))
-    author_name = db.Column(db.String(100))
-    user_id = db.Column(db.Integer,db.ForeignKey('user.id'))
-
-class User(db.Model,UserMixin): #login with usermixin
-    id = db.Column(db.Integer,primary_key=True)
-    email = db.Column(db.String(100),unique=True)
-    passsword = db.Column(db.String(100))
-    first_name = db.Column(db.String(100))
-    Book = db.relationship('Book')
-    
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
